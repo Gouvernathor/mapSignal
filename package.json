@@ -2,9 +2,31 @@
   "name": "mapsignal",
   "version": "1.0.0",
   "description": "A specialization of Angular's signals for Map objects.",
-  "main": "mapSignal.js",
+  "type": "module",
+  "main": "./dist/mapSignal.js",
+  "types": "./dist/mapSignal.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/mapSignal.d.ts",
+        "default": "./dist/mapSignal.js"
+      },
+      "require": {
+        "types": "./dist/mapSignal.d.cts",
+        "default": "./dist/mapSignal.cjs"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "build": "tsup",
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gouvernathor/mapSignal.git"
   },
   "keywords": [
     "angular",
@@ -13,6 +35,14 @@
   ],
   "author": "Gouvernathor",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gouvernathor/mapSignal/issues"
+  },
+  "homepage": "https://github.com/Gouvernathor/mapSignal#readme",
+  "devDependencies": {
+    "tsup": "^8.3.5",
+    "typescript": "*"
+  },
   "dependencies": {
     "@angular/core": "16.0 - 19.0"
   }
