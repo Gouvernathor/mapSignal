@@ -6,16 +6,23 @@ export interface MapSignal<K, V> extends Signal<ReadonlyMap<K, V>> {
     asReadonly(): Signal<ReadonlyMap<K, V>>;
 }
 
+export interface CreateMapSignalOptions<K, V> extends Omit<CreateSignalOptions<Map<K, V>>, "equal"> {
+    equal(a: V, b: V): boolean;
+}
+
 export function mapSignal<K, V>(
     initialValue: Map<K, V> = new Map(),
-    options: CreateSignalOptions<Map<K, V>> = { equal: () => false },
+    { equal, ...options }: CreateMapSignalOptions<K, V> = { equal: () => false },
 ): MapSignal<K, V> {
     const sig = signal(initialValue, options);
 
     function set(key: K, value: V) {
         const sigValue = sig();
+        const oldValue = sigValue.get(key);
         sigValue.set(key, value);
-        sig.set(sigValue);
+        if (oldValue !== undefined && equal(oldValue, value)) {
+            sig.set(sigValue);
+        }
     }
     function del(key: K) {
         const sigValue = sig();
