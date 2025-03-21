@@ -40,7 +40,7 @@ This module provides a new creator function, mapSignal, and an interface for the
 
 - `initialValue` defaults to a new empty map, as opposed to the base signal constructor where the parameter is required.
 
-- `options` is the same as taken by the native `signal`, but with the `equal` key defaulting to one always returning false.
+- `options` is the same as taken by the native `signal`, except that the `equal` key is an equality function for the *map*'s values, of type `V`, rather than the *signal*'s value, of type `Map<K, V>`. It is used when the `set` method is called, to determine whether to refresh the signal or not.
 
 `interface MapSignal<K, V>`
 
