@@ -12,9 +12,9 @@ export interface CreateMapSignalOptions<K, V> extends Omit<CreateSignalOptions<M
 
 export function mapSignal<K, V>(
     initialValue: Map<K, V> = new Map(),
-    { equal, ...options }: CreateMapSignalOptions<K, V> = { equal: () => false },
+    { equal, ...options }: CreateMapSignalOptions<K, V> = { equal: Object.is },
 ): MapSignal<K, V> {
-    const sig = signal(initialValue, options);
+    const sig = signal(initialValue, { equal: () => false, ...options });
 
     function set(key: K, value: V) {
         const sigValue = sig();
