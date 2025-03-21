@@ -1,17 +1,5 @@
 import { CreateSignalOptions, signal, Signal } from "@angular/core";
 
-function mapEquals(m1: Map<any, any>, m2: Map<any, any>) {
-    if (m1.size !== m2.size) {
-        return false;
-    }
-    for (const [key, value] of m1) {
-        if (value !== m2.get(key)) {
-            return false;
-        }
-    }
-    return true;
-}
-
 export interface MapSignal<K, V> extends Signal<ReadonlyMap<K, V>> {
     set(key: K, value: V): void;
     delete(key: K): void;
@@ -20,7 +8,7 @@ export interface MapSignal<K, V> extends Signal<ReadonlyMap<K, V>> {
 
 export function mapSignal<K, V>(
     initialValue: Map<K, V> = new Map(),
-    options: CreateSignalOptions<Map<K, V>> = { equal: mapEquals },
+    options: CreateSignalOptions<Map<K, V>> = { equal: () => false },
 ): MapSignal<K, V> {
     const sig = signal(initialValue, options);
 
