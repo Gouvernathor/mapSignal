@@ -20,7 +20,7 @@ export function mapSignal<K, V>(
         const sigValue = sig();
         const oldValue = sigValue.get(key);
         sigValue.set(key, value);
-        if (oldValue !== undefined && equal(oldValue, value)) {
+        if (oldValue === undefined || !equal(oldValue, value)) {
             sig.set(sigValue);
         }
     }
