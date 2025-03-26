@@ -17,17 +17,17 @@ export function mapSignal<K, V>(
     const sig = signal(initialValue, { equal: () => false, ...options });
 
     function set(key: K, value: V) {
-        const sigValue = sig();
-        const oldValue = sigValue.get(key);
-        sigValue.set(key, value);
+        const map = sig();
+        const oldValue = map.get(key);
+        map.set(key, value);
         if (oldValue === undefined || !equal(oldValue, value)) {
-            sig.set(sigValue);
+            sig.set(map);
         }
     }
     function del(key: K) {
-        const sigValue = sig();
-        if (sigValue.delete(key)) {
-            sig.set(sigValue);
+        const map = sig();
+        if (map.delete(key)) {
+            sig.set(map);
         }
     }
     function asReadonly() {
