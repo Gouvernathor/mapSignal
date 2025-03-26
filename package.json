@@ -1,6 +1,6 @@
 {
   "name": "mapsignal",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "A specialization of Angular's signals for Map objects.",
   "type": "module",
   "main": "./dist/mapSignal.js",
