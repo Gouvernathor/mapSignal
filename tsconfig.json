@@ -1,11 +1,15 @@
 {
+    "extends": "@tsconfig/strictest/tsconfig.json",
     "compilerOptions": {
-        "target": "ES2015",
-        "module": "Preserve",
+        "target": "es2015",
+        "module": "preserve",
+
+        "outDir": "dist",
         "sourceMap": true,
-        "outDir": "out",
-        "strict": true,
-        "noImplicitOverride": true,
-        "noImplicitReturns": true
-    }
+
+        "preserveConstEnums": false,
+        "declaration": true,
+        "isolatedModules": false,
+    },
+    "include": [ "mapSignal.ts" ]
 }
